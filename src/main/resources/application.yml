@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: rbac-auth
+  datasource:
+    url: ${DATABASE_URL:jdbc:h2:file:./data/rbac-auth;DB_CLOSE_ON_EXIT=FALSE}
+    username: ${DATABASE_USERNAME:sa}
+    password: ${DATABASE_PASSWORD:}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: false
+  jackson:
+    default-property-inclusion: non_null
+
+server:
+  error:
+    include-message: never
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:}
+    access-token-ttl: ${ACCESS_TOKEN_TTL:PT15M}
+  encryption:
+    key: ${CREDENTIAL_ENCRYPTION_KEY:}
+  refresh-token-ttl: ${REFRESH_TOKEN_TTL:PT168H}
+  cookie-secure: ${COOKIE_SECURE:false}
+  bootstrap-admin:
+    username: ${ADMIN_USERNAME:}
+    password: ${ADMIN_PASSWORD:}
